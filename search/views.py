@@ -7,6 +7,10 @@ from .models import Card
 def index(request):
     return HttpResponse("Search for your cards hereeeeee.")
 
+def help(request):
+    helpdict = {'help_insert': 'HELP PAGE'}
+    return render(request, 'search/help.html', context=helpdict)
+
 def detail(request, card_id):
     card = get_object_or_404(Card, pk=card_id)
     return render(request, 'search/detail.html', {'card': card})
