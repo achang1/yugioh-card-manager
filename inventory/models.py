@@ -24,6 +24,9 @@ class Card(models.Model):
 
     class Meta:
         abstract = True
+    
+    def __str__(self):
+        return str(self.name, type(self).__name__)
 
 class Monster(Card):
     class CardAttribute(ChoiceEnum):
@@ -36,6 +39,8 @@ class Monster(Card):
         WIND = "Wind"
     
     class CardType(ChoiceEnum):
+        NORMAL = "Normal"
+        EFFECT = "Effect"
         RITUAL = "Ritual"
         FUSION = "Fusion"
         SYNCHRO = "Synchro"
