@@ -1,6 +1,7 @@
-# from django.contrib import admin
-# from .models import Card, Monster
+from django.contrib import admin
+from .models import Monster, Magic, Trap
 
-# # Register your models here.
-# admin.site.register(Card)
-# admin.site.register(Monster)
+
+@admin.register(Monster, Magic, Trap)
+class ViewAdmin(admin.ModelAdmin):
+    pass

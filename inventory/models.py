@@ -45,11 +45,36 @@ class Monster(Card):
         FUSION = "Fusion"
         SYNCHRO = "Synchro"
         XYZ = "XYZ"
+    
+    class MonsterType(ChoiceEnum):
+        AQUA = "Aqua"
+        BEAST = "Beast"
+        BEAST_WARRIOR = "Beast-Warrior"
+        DINOSAUR = "Dinosaur"
+        DRAGON = "Dragon"
+        FAIRY = "Fairy"
+        FIEND = "Fiend"
+        FISH = "Fish"
+        INSECT = "Insect"
+        MACHINE = "Machine"
+        PLANT = "Plant"
+        PSYCHIC = "Psychic"
+        PYRO = "Pyro"
+        REPTILE = "Reptile"
+        ROCK = "Rock"
+        SEA_SERPENT = "Sea Serpent"
+        SPELLCASTER = "Spellcaster"
+        THUNDER = "Thunder"
+        WARRIOR = "Warrior"
+        WINGED_BEAST = "Winged Beast"
+        WYRM = "Wyrm"
+        ZOMBIE = "Zombie"
 
     atk_pts = models.IntegerField(default=0)
     def_pts = models.IntegerField(default=0)
     attribute = models.CharField(max_length=30, choices=CardAttribute.choices())
     card_type = models.CharField(max_length=30, choices=CardType.choices())
+    monster_type = models.CharField(max_length=30, choices=MonsterType.choices())
     level = models.IntegerField(default=0)
     effect = models.BooleanField(default=False)
 
