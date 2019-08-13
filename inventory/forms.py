@@ -37,6 +37,7 @@ class SignUpForm(forms.Form):
 
         if password and verify_password and password != verify_password:
             raise forms.ValidationError("Make sure passwords match.")
+        return password
 
     def save(self):
         user = User.objects.create_user(
