@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'inventory.apps.InventoryConfig',
 ]
 
@@ -57,7 +58,9 @@ ROOT_URLCONF = 'Yugioh_Card_Manager.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATE_DIR,],
+        'DIRS': [
+            TEMPLATE_DIR,
+            ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

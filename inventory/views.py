@@ -1,12 +1,27 @@
-# from django.shortcuts import render
-# from django.http import HttpResponse
-# from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse
+from django.contrib.auth import login, authenticate
+from django.contrib import messages
+from .models import Monster, Magic, Trap
+from .forms import SignUpForm
 
-# from .models import Card
-# from forms import UserForm
 
-# def index(request):
-#     return HttpResponse("Search for your cards hereeeeee.")
+def index(request):
+    """
+    View for user home page.
+    """
+    return render(request, 'inventory/index.html')
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success('Account successfully created!')
+            return redirect('home_page')
+    else:
+        form = SignUpForm()
+    return render(request, 'inventory/signup.html', {'form': form})
 
 # def help(request):
 #     helpdict = {'help_insert': 'HELP PAGE'}
@@ -19,19 +34,3 @@
 # def strategies(requrest, card_id):
 #     strategies = "You're looking at the strategic use of the card %s."
 #     return HttpResponse(strategies % card_id)
-
-# def user_view(request):
-#     form = UserForm()
-#     return render(request, 'inventory/form_page.html', {'form': form})
-
-# def users(request):
-#     form = UserForm()
-#     if request.method == "POST":
-#         form = UserForm(request.POST)
-
-#         if form.is_valid():
-#             form.save(commit=True)
-#             return index(request)
-#         else:
-#             print('ERROR FORM INVALID')
-#     return render(request, 'inventory/form_page.html', {'form': form})
