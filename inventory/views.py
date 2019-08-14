@@ -14,14 +14,17 @@ def index(request):
 
 def signup(request):
     if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            form.save()
+        signup_form = SignUpForm(request.POST)
+        if signup_form.is_valid():
+            user = signup_form.save()
+            # Creates hashed password from raw password
+            user.set_password(user.password)
+            user.save()
             messages.success('Account successfully created!')
             return redirect('home_page')
     else:
-        form = SignUpForm()
-    return render(request, 'inventory/signup.html', {'form': form})
+        signup_form = SignUpForm()
+    return render(request, 'inventory/signup.html', {'signup_form': signup_form})
 
 # def help(request):
 #     helpdict = {'help_insert': 'HELP PAGE'}

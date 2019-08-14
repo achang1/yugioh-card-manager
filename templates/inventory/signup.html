@@ -1,5 +1,39 @@
-<form action="/signup/" method="post">
-    <label for="username">Username: </label>
-    <input id="username" type="text" name="username" value="{{ current_username }}">
-    <input type="submit" value="OK">
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Account Sign Up Page</title>
+</head>
+<body>
+    <h1>Account Sign Up</h1>
+    <p>Please fill in the form. All fields are required.</p>
+
+    <form action="/signup/" method="post">
+        <label for="username">Username: </label>
+        <input id="username" type="text" name="username" placeholder="Username" required>
+
+        <label for="first_name">First Name: </label>
+        <input id="first_name" type="text" name="first_name" placeholder="First Name" required>
+
+        <label for="last_name">Last Name: </label>
+        <input id="last_name" type="text" name="last_name" placeholder="Last Name" required>
+
+        <label for="email">Email: </label>
+        <input id="email" type="email" name="email" placeholder="Email" required>
+
+        <label for="verify_email">Verify Email: </label>
+        <input id="verify_email" type="email" name="verify_email" placeholder="Verify Email" required>
+
+        <label for="password">Password: </label>
+        <input id="password" type="password" name="password" placeholder="Password" required>
+
+        <label for="verify_password">Verify Password: </label>
+        <input id="verify_password" type="password" name="verify_password" placeholder="Verify Password" required>
+        
+        <input type="submit" value="Submit">
+    </form>
+
+</body>
+</html>
