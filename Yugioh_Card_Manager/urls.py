@@ -21,4 +21,5 @@ from inventory import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('inventory/', include('inventory.urls')),
+    path('inventory/', include('django.contrib.auth.urls')),
 ]

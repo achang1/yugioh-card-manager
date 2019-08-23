@@ -12,6 +12,12 @@ def index(request):
     """
     return render(request, 'inventory/index.html')
 
+def login(request):
+    """
+    View for login page.
+    """
+    return render(request, 'inventory/login.html')
+
 def signup(request):
     if request.method == 'POST':
         signup_form = SignUpForm(request.POST)
@@ -20,8 +26,9 @@ def signup(request):
             # Creates hashed password from raw password
             user.set_password(user.password)
             user.save()
-            messages.success('Account successfully created!')
-            return redirect('home_page')
+            messages.success(request, 'Account successfully created!')
+            # TODO: redirect to page. Using render, path is still signup using login template
+            return render(request, 'inventory/login.html')
     else:
         signup_form = SignUpForm()
     return render(request, 'inventory/signup.html', {'signup_form': signup_form})

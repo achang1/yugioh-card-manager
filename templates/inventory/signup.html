@@ -1,16 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Account Sign Up Page</title>
-</head>
-<body>
-    <h1>Account Sign Up</h1>
-    <p>Please fill in the form. All fields are required.</p>
+{% extends "base.html" %}
 
-    <form action="/signup/" method="post">
+{% block title %}Account Sign Up Page{% endblock %}
+
+{% block content %}
+
+<h1>Account Sign Up</h1>
+<p>Please fill in the form. All fields are required.</p>
+
+<div class="container">
+    <form action="signup" method="post" id="signup_form">
+        {% csrf_token %}
         <label for="username">Username: </label>
         <input id="username" type="text" name="username" placeholder="Username" required>
 
@@ -34,6 +33,5 @@
         
         <input type="submit" value="Submit">
     </form>
-
-</body>
-</html>
+</div>
+{% endblock %}
