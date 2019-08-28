@@ -26,8 +26,7 @@ def signup(request):
             user.set_password(user.password)
             user.save()
             messages.success(request, 'Account successfully created!')
-            # TODO: redirect to page. Using render, path is still signup using login template
-            return render(request, 'accounts/login.html')
+            return render(request, 'accounts/signup_success.html')
     else:
         signup_form = SignUpForm()
     return render(request, 'accounts/signup.html', {'signup_form': signup_form})
