@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'inventory.apps.InventoryConfig',
+    'accounts.apps.AccountsConfig',
 ]
 
 MIDDLEWARE = [
@@ -138,3 +139,6 @@ STATICFILES_DIR = [
 # Media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = MEDIA_DIR
+
+# Redirected pages
+LOGIN_REDIRECT_URL = '/'

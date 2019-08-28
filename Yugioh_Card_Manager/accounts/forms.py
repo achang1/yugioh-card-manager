@@ -50,14 +50,3 @@ class SignUpForm(forms.Form):
             last_name=self.cleaned_data['last_name']
         )
         return user
-
-# class FormName(forms.ModelForm):
-#     name = forms.CharField(max_length=100, unique=True)
-#     description = forms.CharField(max_length=500)
-#     attribute = forms.CharField(max_length=30)
-#     type = forms.CharField(max_length=30)
-#     rarity = forms.CharField(max_length=5)
-#     colour = forms.CharField(max_length=30)
-
-# class MonsterForm(forms.ModelForm):
-#     class Meta:
