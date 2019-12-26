@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Yu-Gi-Oh! Card Manager{% endblock %}
 
 {% block content %}
-{% if user.is_authenticated %}
-    Hello {{ user.username }}!
-{% endif %}
-<form action="logout" method="post">
-    {% csrf_token %}
-    <input type="submit" value="Logout">
+<h1>Yu-Gi-Oh! Card Manager Homepage</h1>
+<p>This website allows you to manage your Yu-Gi-Oh! cards and build your dream decks.</p>
+<form action="login">
+    <input type="submit" value="Click here to login.">
+</form>
+<form action="signup">
+    <input type="submit" value="Click here to signup.">
 </form>
 {% endblock %}

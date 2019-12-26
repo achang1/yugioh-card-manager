@@ -10,9 +10,12 @@ def index(request):
     """
     View for user home page.
     """
-    return render(request, 'accounts/index.html')
+    return render(request, 'accounts/home.html')
 
 def user_signup(request):
+    """
+    View for sign up page.
+    """
     if request.method == 'POST':
         signup_form = SignUpForm(request.POST)
         if signup_form.is_valid():
@@ -38,12 +41,17 @@ def user_login(request):
             if user.check_password(password):
                 login(request, user)
                 messages.success(request, 'Successfully logged in!')
-                return render(request, 'accounts/home.html')
+                # TODO: use redirect to different url instead of render
+                return render(request, 'accounts/user_home.html')
             else:
-                print('Invalid authentication. Please try again.')
+                messages.error(request, 'Invalid authentication. Please try again.')
         except Exception as e:
-            print('User does not exist.')
+            messages.error(request, 'User does not exist. Please try again.')
     return render(request, 'accounts/login.html')
 
-# def user_logout(request):
-#     logout(request)
+def user_logout(request):
+    """
+    View for logout page.
+    """
+    logout(request)
+    return render(request, 'accounts/logout_success.html')
