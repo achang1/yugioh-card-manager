@@ -20,13 +20,12 @@ class Card(models.Model):
     name = models.CharField(max_length=100, unique=True)
     description = models.CharField(max_length=500)
     rarity = models.CharField(max_length=30, choices=CardRarity.choices())
-    colour = models.CharField(max_length=30)
 
     class Meta:
         abstract = True
-    
+
     def __str__(self):
-        return str(self.name, type(self).__name__)
+        return self.name
 
 class Monster(Card):
     class CardAttribute(ChoiceEnum):

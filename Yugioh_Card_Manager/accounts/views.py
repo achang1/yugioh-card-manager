@@ -44,6 +44,7 @@ def user_login(request):
                 # TODO: use redirect to different url instead of render
                 return render(request, 'accounts/user_home.html')
             else:
+                # TODO: fix message display (clear it after each run)
                 messages.error(request, 'Invalid authentication. Please try again.')
         except Exception as e:
             messages.error(request, 'User does not exist. Please try again.')

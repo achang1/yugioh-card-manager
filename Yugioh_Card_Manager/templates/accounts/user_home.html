@@ -5,9 +5,15 @@
 {% block content %}
 {% if user.is_authenticated %}
     Hello {{ user.username }}!
+
+    <form action="{% url 'inventory:cards' %}" method="get">
+        {% csrf_token %}
+        <input type="submit" value="View all cards">
+    </form>
+
+    <form action="logout" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Logout">
+    </form>
 {% endif %}
-<form action="logout" method="post">
-    {% csrf_token %}
-    <input type="submit" value="Logout">
-</form>
 {% endblock %}
