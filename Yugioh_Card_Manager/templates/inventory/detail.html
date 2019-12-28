@@ -5,4 +5,17 @@
 {% block content %}
 <h1>{{ object.name }}</h1>
 <p>{{ object.description }}</p>
+<p>Card type: {{ object.card_type }}</p>
+
+{% if object.level and object.attribute and object.monster_type%}
+    <p>Level: {{ object.level }}</p>
+    <p>Attribute: {{ object.attribute }}</p>
+    <p>Type: {{ object.monster_type }}</p>
+{% endif %}
+
+{% if object.atk_pts and object.def_pts%}
+    <p>Attack: {{ object.atk_pts }}</p>
+    <p>Defence: {{ object.def_pts }}</p>
+{% endif %}
+
 {% endblock %}
