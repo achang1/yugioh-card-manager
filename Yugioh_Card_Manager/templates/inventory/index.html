@@ -6,19 +6,19 @@
 <ul>
     {% for monster in monster_list %}
     <li>
-        {{ monster.name }}
+        <a href="{% url 'inventory:monster_detail' monster.id %}">{{ monster.name }}</a>
     </li>
     {% endfor %}
 
     {% for magic in magic_list %}
     <li>
-        {{ magic.name }}
+        <a href="{% url 'inventory:magic_detail' magic.id %}">{{ magic.name }}</a>
     </li>
     {% endfor %}
 
     {% for trap in trap_list %}
     <li>
-        {{ trap.name }}
+        <a href="{% url 'inventory:trap_detail' trap.id %}">{{ trap.name }}</a>
     </li>
     {% endfor %}
 </ul>

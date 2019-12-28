@@ -24,9 +24,21 @@ class CardsView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return Monster.objects.order_by('name')
 
-class CardDetailView(LoginRequiredMixin, DetailView):
-    model = Card
+
+class MonsterDetailView(LoginRequiredMixin, DetailView):
+    model = Monster
     template_name = 'inventory/detail.html'
+
+
+class MagicDetailView(LoginRequiredMixin, DetailView):
+    model = Magic
+    template_name = 'inventory/detail.html'
+
+
+class TrapDetailView(LoginRequiredMixin, DetailView):
+    model = Trap
+    template_name = 'inventory/detail.html'
+
 
 # class MonsterList(LoginRequiredMixin, APIView):
 #     def get(self, request):

@@ -7,6 +7,7 @@ class ChoiceEnum(Enum):
     def choices(cls):
         return tuple((choice.name, choice.value) for choice in cls)
 
+
 class Card(models.Model):
     class CardRarity(ChoiceEnum):
         COMMON = "Common"
@@ -26,6 +27,7 @@ class Card(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class Monster(Card):
     class CardAttribute(ChoiceEnum):
@@ -77,6 +79,7 @@ class Monster(Card):
     level = models.IntegerField(default=0)
     effect = models.BooleanField(default=False)
 
+
 class Magic(Card):
     class CardType(ChoiceEnum):
         NORMAL = "Normal"
@@ -87,6 +90,7 @@ class Magic(Card):
         RITUAL = "Ritual"
 
     card_type = models.CharField(max_length=30, choices=CardType.choices())
+
 
 class Trap(Card):
     class CardType(ChoiceEnum):
