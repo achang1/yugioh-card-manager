@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  web:
+  app:
     build: .
     command: python3 Yugioh_Card_Manager/manage.py runserver 0.0.0.0:8000
     volumes:
