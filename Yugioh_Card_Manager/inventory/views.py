@@ -5,7 +5,9 @@ from django.contrib.auth.decorators import login_required
 from .models import Monster, Magic, Trap, Card
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView
-from rest_framework.views import APIView
+from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListAPIView
+from rest_framework.mixins import CreateModelMixin
+from .serializers import MonsterSerializer, MagicSerializer, TrapSerializer
 from rest_framework.response import Response
 
 
@@ -22,12 +24,37 @@ class CardsView(LoginRequiredMixin, ListView):
         return context
 
     def get_queryset(self):
-        return Monster.objects.order_by('name')
+        return Monster.objects.all()
 
 
-class MonsterDetailView(LoginRequiredMixin, DetailView):
-    model = Monster
+class MonsterAPIView(LoginRequiredMixin, CreateModelMixin, ListAPIView):
+    lookup_field = 'pk'
+    serializer_class = MonsterSerializer
+
+    def get_queryset(self):
+        return Monster.objects.all()
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+
+    def patch(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+
+
+# DetailView, CreateView, FormView
+class MonsterView(LoginRequiredMixin, RetrieveUpdateDestroyAPIView):
     template_name = 'inventory/detail.html'
+    lookup_field = 'pk'
+    serializer_class = MonsterSerializer
+
+    def get_queryset(self):
+        return Monster.objects.all()
 
 
 class MagicDetailView(LoginRequiredMixin, DetailView):

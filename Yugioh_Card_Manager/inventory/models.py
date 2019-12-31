@@ -1,5 +1,6 @@
 from django.db import models
 from enum import Enum
+from django.contrib.auth.models import User
 
 
 class ChoiceEnum(Enum):
@@ -18,6 +19,7 @@ class Card(models.Model):
         GR = "Ghost Rare"
         GUR = "Gold Ultra Rare"
 
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=100, unique=True)
     description = models.CharField(max_length=500)
     rarity = models.CharField(max_length=30, choices=CardRarity.choices())
