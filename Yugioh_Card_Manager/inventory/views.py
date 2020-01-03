@@ -61,34 +61,3 @@ class MagicDetailView(LoginRequiredMixin, DetailView):
 class TrapDetailView(LoginRequiredMixin, DetailView):
     model = Trap
     template_name = 'inventory/detail.html'
-
-
-# class MonsterList(LoginRequiredMixin, APIView):
-#     def get(self, request):
-#         """
-#         List all monster cards.
-#         """
-#         monsters = Monster.objects.order_by('name')
-#         return Response(monsters)
-
-    # def post(self, request):
-    #     """
-    #     Add a new monster card.
-    #     """
-    #
-
-# @login_required(login_url='/accounts/login')
-# def cards(request, pk):
-
-
-# def help(request):
-#     helpdict = {'help_insert': 'HELP PAGE'}
-#     return render(request, 'inventory/help.html', context=helpdict)
-
-# def detail(request, card_id):
-#     card = get_object_or_404(Card, pk=card_id)
-#     return render(request, 'inventory/detail.html', {'card': card})
-
-# def strategies(requrest, card_id):
-#     strategies = "You're looking at the strategic use of the card %s."
-#     return HttpResponse(strategies % card_id)
