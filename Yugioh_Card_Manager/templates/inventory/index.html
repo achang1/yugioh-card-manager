@@ -6,7 +6,7 @@
 <ul>
     {% for monster in monster_list %}
     <li>
-        <a href="{% url 'inventory:monster_detail' monster.id %}">{{ monster.name }}</a>
+        <a href="{% url 'inventory:monster_crud' monster.id %}">{{ monster.name }}</a>
     </li>
     {% endfor %}
 

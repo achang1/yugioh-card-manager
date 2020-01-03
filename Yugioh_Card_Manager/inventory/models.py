@@ -30,6 +30,10 @@ class Card(models.Model):
     def __str__(self):
         return self.name
 
+    @property
+    def owner(self):
+        return self.user
+
 
 class Monster(Card):
     class CardAttribute(ChoiceEnum):

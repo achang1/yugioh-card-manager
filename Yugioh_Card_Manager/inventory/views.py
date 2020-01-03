@@ -1,13 +1,11 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
-from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from .models import Monster, Magic, Trap, Card
+from django.db.models import Q
+from .models import Monster, Magic, Trap
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView
 from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListAPIView
 from rest_framework.mixins import CreateModelMixin
 from .serializers import MonsterSerializer, MagicSerializer, TrapSerializer
+from .permissions import IsOwnerOrReadOnly
 from rest_framework.response import Response
 
 
@@ -27,12 +25,16 @@ class CardsView(LoginRequiredMixin, ListView):
         return Monster.objects.all()
 
 
-class MonsterAPIView(LoginRequiredMixin, CreateModelMixin, ListAPIView):
+class MonsterAPIView(CreateModelMixin, ListAPIView):
     lookup_field = 'pk'
     serializer_class = MonsterSerializer
 
     def get_queryset(self):
-        return Monster.objects.all()
+        queryset = Monster.objects.all()
+        # query = self.request.GET.get("q")
+        # if query is not None:
+        #     queryset = queryset.filter(Q(name__icontains=query)).distinct()
+        return queryset
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
@@ -40,18 +42,12 @@ class MonsterAPIView(LoginRequiredMixin, CreateModelMixin, ListAPIView):
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
 
-    def put(self, request, *args, **kwargs):
-        return self.update(request, *args, **kwargs)
 
-    def patch(self, request, *args, **kwargs):
-        return self.update(request, *args, **kwargs)
-
-
-# DetailView, CreateView, FormView
-class MonsterView(LoginRequiredMixin, RetrieveUpdateDestroyAPIView):
+class MonsterCrudView(RetrieveUpdateDestroyAPIView):
     template_name = 'inventory/detail.html'
     lookup_field = 'pk'
     serializer_class = MonsterSerializer
+    permission_classes = [IsOwnerOrReadOnly]
 
     def get_queryset(self):
         return Monster.objects.all()
