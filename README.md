@@ -1,4 +1,5 @@
 # Yu-Gi-Oh Card Manager
+This web app allows you to manage your Yu-Gi-Oh! cards and build your dream decks.
 
 ## Install
 python 3.7\
