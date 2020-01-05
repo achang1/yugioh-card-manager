@@ -13,7 +13,17 @@
 
     <form action="{% url 'inventory:monster_create' %}" method="get">
         {% csrf_token %}
-        <input type="submit" value="Create cards">
+        <input type="submit" value="Create monster cards">
+    </form>
+
+    <form action="{% url 'inventory:magic_create' %}" method="get">
+        {% csrf_token %}
+        <input type="submit" value="Create magic cards">
+    </form>
+
+    <form action="{% url 'inventory:trap_create' %}" method="get">
+        {% csrf_token %}
+        <input type="submit" value="Create trap cards">
     </form>
 
     <form action="logout" method="post">

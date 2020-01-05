@@ -6,7 +6,6 @@ from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListAPIView
 from rest_framework.mixins import CreateModelMixin
 from .serializers import MonsterSerializer, MagicSerializer, TrapSerializer
 from .permissions import IsOwnerOrReadOnly
-from rest_framework.response import Response
 
 
 class CardsView(LoginRequiredMixin, ListView):
@@ -43,8 +42,8 @@ class MonsterAPIView(CreateModelMixin, ListAPIView):
         return self.create(request, *args, **kwargs)
 
 
-class MonsterCrudView(RetrieveUpdateDestroyAPIView):
-    template_name = 'inventory/detail.html'
+class MonsterRudView(RetrieveUpdateDestroyAPIView):
+    # template_name = 'inventory/detail.html'
     lookup_field = 'pk'
     serializer_class = MonsterSerializer
     permission_classes = [IsOwnerOrReadOnly]
@@ -53,11 +52,57 @@ class MonsterCrudView(RetrieveUpdateDestroyAPIView):
         return Monster.objects.all()
 
 
-class MagicDetailView(LoginRequiredMixin, DetailView):
-    model = Magic
-    template_name = 'inventory/detail.html'
+class MagicAPIView(CreateModelMixin, ListAPIView):
+    lookup_field = 'pk'
+    serializer_class = MagicSerializer
+
+    def get_queryset(self):
+        queryset = Magic.objects.all()
+        # query = self.request.GET.get("q")
+        # if query is not None:
+        #     queryset = queryset.filter(Q(name__icontains=query)).distinct()
+        return queryset
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
 
 
-class TrapDetailView(LoginRequiredMixin, DetailView):
-    model = Trap
-    template_name = 'inventory/detail.html'
+class MagicRudView(RetrieveUpdateDestroyAPIView):
+    # template_name = 'inventory/detail.html'
+    lookup_field = 'pk'
+    serializer_class = MagicSerializer
+    permission_classes = [IsOwnerOrReadOnly]
+
+    def get_queryset(self):
+        return Magic.objects.all()
+
+
+class TrapAPIView(CreateModelMixin, ListAPIView):
+    lookup_field = 'pk'
+    serializer_class = TrapSerializer
+
+    def get_queryset(self):
+        queryset = Trap.objects.all()
+        # query = self.request.GET.get("q")
+        # if query is not None:
+        #     queryset = queryset.filter(Q(name__icontains=query)).distinct()
+        return queryset
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+
+
+class TrapRudView(RetrieveUpdateDestroyAPIView):
+    # template_name = 'inventory/detail.html'
+    lookup_field = 'pk'
+    serializer_class = TrapSerializer
+    permission_classes = [IsOwnerOrReadOnly]
+
+    def get_queryset(self):
+        return Trap.objects.all()
