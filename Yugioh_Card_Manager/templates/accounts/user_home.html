@@ -11,6 +11,11 @@
         <input type="submit" value="View all cards">
     </form>
 
+    <form action="{% url 'inventory:monster_create' %}" method="get">
+        {% csrf_token %}
+        <input type="submit" value="Create cards">
+    </form>
+
     <form action="logout" method="post">
         {% csrf_token %}
         <input type="submit" value="Logout">
