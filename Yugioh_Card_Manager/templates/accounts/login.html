@@ -5,7 +5,7 @@
 {% block content %}
 <h1>Login</h1>
 <div class="container">
-    <form action="login" method="post">
+    <form action="/accounts/login" method="post">
         {% csrf_token %}
         <label for="username">Username: </label>
         <input id="username" type="text" name="username" placeholder="Username" required>
@@ -17,4 +17,7 @@
     </form>
 </div>
 {% for message in messages %}<h3>{{ message }}</h3>{% endfor %}
+<form action="/accounts/home">
+    <input type="submit" value="Return to homepage.">
+</form>
 {% endblock %}

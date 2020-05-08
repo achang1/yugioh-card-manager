@@ -21,5 +21,8 @@
         <a href="{% url 'inventory:trap_rud' trap.id %}">{{ trap.name }}</a>
     </li>
     {% endfor %}
+    <form action="/accounts/user_home">
+        <input type="submit" value="Back">
+    </form>
 </ul>
 {% endblock %}

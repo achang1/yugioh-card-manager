@@ -8,7 +8,7 @@ from .forms import SignUpForm
 
 def index(request):
     """
-    View for user home page.
+    View for website home page.
     """
     return render(request, 'accounts/home.html')
 
@@ -49,6 +49,14 @@ def user_login(request):
         except Exception as e:
             messages.error(request, 'User does not exist. Please try again.')
     return render(request, 'accounts/login.html')
+
+def user_home(request):
+    """
+    View for user home page.
+    """
+    # TODO: Check if user homepage is displayed only when authenticated.
+    # (Right now renders the page when we click 'Back' from 'View all cards'.)
+    return render(request, 'accounts/user_home.html')
 
 def user_logout(request):
     """
