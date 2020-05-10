@@ -23,7 +23,6 @@ def user_signup(request):
             # Creates hashed password from raw password
             user.set_password(signup_form.cleaned_data['password'])
             user.save()
-            messages.success(request, 'Account successfully created!')
             return render(request, 'accounts/signup_success.html')
     else:
         signup_form = SignUpForm()
