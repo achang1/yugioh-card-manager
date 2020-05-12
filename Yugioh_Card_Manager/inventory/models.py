@@ -1,6 +1,7 @@
 from django.db import models
 from enum import Enum
 from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 class ChoiceEnum(Enum):
@@ -20,12 +21,14 @@ class Card(models.Model):
         GUR = "Gold Ultra Rare"
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    name = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=100)
     description = models.CharField(max_length=500)
     rarity = models.CharField(max_length=30, choices=CardRarity.choices())
+    copies = models.IntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(3)])
 
     class Meta:
         abstract = True
+        unique_together = (('name', 'user'),)
 
     def __str__(self):
         return self.name

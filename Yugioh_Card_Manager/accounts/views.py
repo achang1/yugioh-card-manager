@@ -39,7 +39,6 @@ def user_login(request):
             user = User.objects.get(username=username)
             if user.check_password(password):
                 login(request, user)
-                # messages.success(request, 'Successfully logged in!')
                 # TODO: use redirect to different url instead of render
                 return render(request, 'accounts/user_home.html')
             else:

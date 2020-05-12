@@ -21,7 +21,7 @@ class CardsView(LoginRequiredMixin, ListView):
         return context
 
     def get_queryset(self):
-        return Monster.objects.all()
+        return Monster.objects.filter(user=self.request.user)
 
 
 class MonsterAPIView(CreateModelMixin, ListAPIView):
@@ -29,7 +29,7 @@ class MonsterAPIView(CreateModelMixin, ListAPIView):
     serializer_class = MonsterSerializer
 
     def get_queryset(self):
-        queryset = Monster.objects.all()
+        queryset = Monster.objects.filter(user=self.request.user)
         # query = self.request.GET.get("q")
         # if query is not None:
         #     queryset = queryset.filter(Q(name__icontains=query)).distinct()
@@ -49,7 +49,7 @@ class MonsterRudView(RetrieveUpdateDestroyAPIView):
     permission_classes = [IsOwnerOrReadOnly]
 
     def get_queryset(self):
-        return Monster.objects.all()
+        return Monster.objects.filter(user=self.request.user)
 
 
 class MagicAPIView(CreateModelMixin, ListAPIView):
@@ -57,7 +57,7 @@ class MagicAPIView(CreateModelMixin, ListAPIView):
     serializer_class = MagicSerializer
 
     def get_queryset(self):
-        queryset = Magic.objects.all()
+        queryset = Magic.objects.filter(user=self.request.user)
         # query = self.request.GET.get("q")
         # if query is not None:
         #     queryset = queryset.filter(Q(name__icontains=query)).distinct()
@@ -77,7 +77,7 @@ class MagicRudView(RetrieveUpdateDestroyAPIView):
     permission_classes = [IsOwnerOrReadOnly]
 
     def get_queryset(self):
-        return Magic.objects.all()
+        return Magic.objects.filter(user=self.request.user)
 
 
 class TrapAPIView(CreateModelMixin, ListAPIView):
@@ -85,7 +85,7 @@ class TrapAPIView(CreateModelMixin, ListAPIView):
     serializer_class = TrapSerializer
 
     def get_queryset(self):
-        queryset = Trap.objects.all()
+        queryset = Trap.objects.filter(user=self.request.user)
         # query = self.request.GET.get("q")
         # if query is not None:
         #     queryset = queryset.filter(Q(name__icontains=query)).distinct()
@@ -105,4 +105,4 @@ class TrapRudView(RetrieveUpdateDestroyAPIView):
     permission_classes = [IsOwnerOrReadOnly]
 
     def get_queryset(self):
-        return Trap.objects.all()
+        return Trap.objects.filter(user=self.request.user)
