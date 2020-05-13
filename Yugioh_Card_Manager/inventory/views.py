@@ -3,9 +3,10 @@ from .models import Monster, Magic, Trap
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView
 from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListAPIView
-from rest_framework.mixins import CreateModelMixin
+from rest_framework.mixins import CreateModelMixin, UpdateModelMixin
 from .serializers import MonsterSerializer, MagicSerializer, TrapSerializer
 from .permissions import IsOwnerOrReadOnly
+from rest_framework.exceptions import ValidationError
 
 
 class CardsView(LoginRequiredMixin, ListView):
@@ -36,6 +37,10 @@ class MonsterAPIView(CreateModelMixin, ListAPIView):
         return queryset
 
     def perform_create(self, serializer):
+        # Check whether object already exists
+        queryset = Monster.objects.filter(user=self.request.user, name=self.request.data.get('name'))
+        if queryset.exists():
+            raise ValidationError('Card already added.')
         serializer.save(user=self.request.user)
 
     def post(self, request, *args, **kwargs):
@@ -64,6 +69,9 @@ class MagicAPIView(CreateModelMixin, ListAPIView):
         return queryset
 
     def perform_create(self, serializer):
+        queryset = Magic.objects.filter(user=self.request.user, name=self.request.data.get('name'))
+        if queryset.exists():
+            raise ValidationError('Card already added.')
         serializer.save(user=self.request.user)
 
     def post(self, request, *args, **kwargs):
@@ -92,6 +100,9 @@ class TrapAPIView(CreateModelMixin, ListAPIView):
         return queryset
 
     def perform_create(self, serializer):
+        queryset = Trap.objects.filter(user=self.request.user, name=self.request.data.get('name'))
+        if queryset.exists():
+            raise ValidationError('Card already added.')
         serializer.save(user=self.request.user)
 
     def post(self, request, *args, **kwargs):
